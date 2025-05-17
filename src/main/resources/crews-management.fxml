@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  stylesheets="@style.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Gestion des équipages" styleClass="section-title" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="addCrewBtn" text="Ajouter un équipage" styleClass="action-button"  />
+        </HBox>
+        <TableView fx:id="crewsTable">
+            <columns>
+                <TableColumn text="ID" prefWidth="100" />
+                <TableColumn text="Pilote" prefWidth="150" />
+                <TableColumn text="Copilote" prefWidth="150" />
+                <TableColumn text="Hôtesses/Stewards" prefWidth="150" />
+                <TableColumn text="Disponibilité" prefWidth="100" />
+                <TableColumn text="Qualifications" prefWidth="150" />
+                <TableColumn text="Actions" prefWidth="100" />
+            </columns>
+        </TableView>
+    </children>
+</VBox>

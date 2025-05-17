@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.MainController"
+            stylesheets="@style.css">
+
+    <left>
+        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="256.0" spacing="10.0">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" styleClass="sidebar-header">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                    <children>
+                        <ImageView fitWidth="40" fitHeight="40" preserveRatio="true">
+                            <image>
+                                <Image url="@/tunisair-logo.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="Tunisair" styleClass="logo-text" />
+                    </children>
+                </HBox>
+                <!-- Navigation -->
+                <VBox styleClass="nav-menu" spacing="5">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                    <children>
+                        <Button fx:id="dashboardBtn" text="Tableau de bord" styleClass="nav-button" onAction="#showDashboard">
+                            <graphic>
+                                <Label text="📊" styleClass="icon" />
+                            </graphic>
+                        </Button>
+                        <Button fx:id="flightsBtn" text="Gestion des vols" styleClass="nav-button" onAction="#showFlights">
+                            <graphic>
+                                <Label text="✈️" styleClass="icon" />
+                            </graphic>
+                        </Button>
+                        <Button fx:id="aircraftsBtn" text="Gestion des avions" styleClass="nav-button" onAction="#showAircrafts">
+                            <graphic>
+                                <Label text="🛩️" styleClass="icon" />
+                            </graphic>
+                        </Button>
+                        <Button fx:id="crewsBtn" text="Gestion des équipages" styleClass="nav-button" onAction="#showCrews">
+                            <graphic>
+                                <Label text="👥" styleClass="icon" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+                <!-- Logout Button -->
+                <Button fx:id="logoutBtn" text="Déconnexion" styleClass="logout-button" onAction="#logout" VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <Label text="🚪" styleClass="icon" />
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- Header (Top) -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER" spacing="20">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20" />
+            </padding>
+            <children>
+                <Label fx:id="pageTitle" text="Tableau de bord" styleClass="header-title" />
+                <Region HBox.hgrow="ALWAYS" />
+                <HBox spacing="10" alignment="CENTER">
+                    <Button styleClass="icon-button">
+                        <graphic>
+                            <Label text="🔔" styleClass="icon" />
+                        </graphic>
+                    </Button>
+                    <Label text="Amine ET Ghada" styleClass="user-name" />
+                </HBox>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Main Content (Center) -->
+    <center>
+        <StackPane fx:id="contentArea">
+            <!-- Le contenu sera chargé dynamiquement ici -->
+        </StackPane>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox styleClass="footer" alignment="CENTER" spacing="20">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20" />
+            </padding>
+            <children>
+                <Label text="© 2025 Tunisair - Tous droits réservés" styleClass="footer-text" />
+                <Region HBox.hgrow="ALWAYS" />
+                <HBox spacing="20" alignment="CENTER">
+                    <Label text="Amine Kilani" styleClass="footer-text" />
+                    <Label text="Ghada Yaacoubi" styleClass="footer-text" />
+                </HBox>
+            </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>

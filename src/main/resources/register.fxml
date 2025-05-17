@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.Text?>
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController" styleClass="background" stylesheets="@login.css">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Circle fx:id="circle1" radius="100" styleClass="decorative-circle" translateX="-300" translateY="-200"/>
+    <Circle fx:id="circle2" radius="70" styleClass="decorative-circle-secondary" translateX="300" translateY="200"/>
+    <Circle fx:id="circle3" radius="40" styleClass="decorative-circle-accent" translateX="280" translateY="-150"/>
+    <Circle fx:id="circle4" radius="25" styleClass="decorative-circle-small" translateX="-250" translateY="150"/>
+
+
+    <!-- Formes géométriques supplémentaires -->
+    <Rectangle width="60" height="60" rotate="45" styleClass="decorative-square" translateX="-300" translateY="50"/>
+    <Rectangle width="40" height="40" rotate="30" styleClass="decorative-square-secondary" translateX="150" translateY="-50"/>
+
+    <!-- Lignes décoratives -->
+    <Line startX="0" startY="0" endX="100" endY="100" styleClass="decorative-line" translateX="-300" translateY="-100"/>
+    <Line startX="0" startY="0" endX="100" endY="100" styleClass="decorative-line" translateX="300" translateY="100"/>
+
+    <VBox alignment="CENTER" spacing="20.0" styleClass="form-card" maxWidth="600">
+        <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
+        </padding>
+        <StackPane styleClass="logo-container">
+            <ImageView fitWidth="250" preserveRatio="true">
+                <image>
+                    <Image url="@/TUN.jpg" />
+                </image>
+            </ImageView>
+        </StackPane>
+        <Text text="Inscription Agent" styleClass="title-text"/>
+
+        <Text text="Créez votre compte pour accéder à l'application" styleClass="subtitle-text"/>
+
+        <HBox styleClass="input-container">
+            <TextField fx:id="emailField" promptText="Email" styleClass="text-field"/>
+        </HBox>
+
+        <VBox spacing="5">
+            <HBox styleClass="input-container">
+                <PasswordField fx:id="passwordField" promptText="Mot de passe" styleClass="password-field"/>
+            </HBox>
+
+        </VBox>
+
+        <HBox styleClass="input-container">
+            <PasswordField fx:id="confirmPasswordField" promptText="Confirmer le mot de passe" styleClass="password-field"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <CheckBox fx:id="termsCheckbox" styleClass="terms-checkbox"/>
+            <Text text="J'accepte les conditions d'utilisation" styleClass="terms-text"/>
+        </HBox>
+
+        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="registerButton" text="S'inscrire" onAction="#handleRegister" styleClass="register-button-primary"/>
+            <Button fx:id="backButton" text="Retour" onAction="#handleBack" styleClass="back-button"/>
+        </HBox>
+
+        <Label fx:id="messageLabel" styleClass="message-label"/>
+
+        <!-- Barre de progression pour l'inscription -->
+        <ProgressBar fx:id="registrationProgress" progress="0.0" visible="false" styleClass="registration-progress"/>
+    </VBox>
+</StackPane>

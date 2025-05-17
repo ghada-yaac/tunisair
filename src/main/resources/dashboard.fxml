@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fitToWidth="true" fitToHeight="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  stylesheets="@style.css">
+    <GridPane hgap="20" vgap="20" styleClass="dashboard-grid">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+        </padding>
+        <!-- Dashboard Cards -->
+        <VBox styleClass="dashboard-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+                <Label text="✈️" styleClass="card-icon" />
+                <Label text="Vols programmés" styleClass="card-title" />
+                <Label fx:id="scheduledFlightsCount" text="42" styleClass="card-value" />
+            </children>
+        </VBox>
+        <VBox styleClass="dashboard-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+                <Label text="✅" styleClass="card-icon" />
+                <Label text="Vols confirmés" styleClass="card-title" />
+                <Label fx:id="confirmedFlightsCount" text="38" styleClass="card-value" />
+            </children>
+        </VBox>
+        <VBox styleClass="dashboard-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+                <Label text="🛠️" styleClass="card-icon" />
+                <Label text="Avions en maintenance" styleClass="card-title" />
+                <Label fx:id="maintenanceAircraftCount" text="3" styleClass="card-value" />
+                <Label text="Actuellement" styleClass="card-subtitle" />
+            </children>
+        </VBox>
+        <!-- Upcoming Flights -->
+        <VBox styleClass="content-card" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Prochains départs" styleClass="section-title" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button text="Voir tout" styleClass="action-button" />
+                </HBox>
+                <VBox spacing="10">
+                    <HBox styleClass="flight-card">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10" />
+                        </padding>
+                        <Label text="TU201 | Tunis - Paris CDG | 10:30" styleClass="flight-info" />
+                    </HBox>
+                    <HBox styleClass="flight-card">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10" />
+                        </padding>
+                        <Label text="TU305 | Tunis - Montréal | 12:45" styleClass="flight-info" />
+                    </HBox>
+                </VBox>
+            </children>
+        </VBox>
+    </GridPane>
+</ScrollPane>

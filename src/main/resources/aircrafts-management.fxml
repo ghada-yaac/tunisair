@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Gestion des avions" styleClass="section-title" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="addAircraftBtn" text="Ajouter un avion" styleClass="action-button" />
+        </HBox>
+        <TableView fx:id="aircraftsTable">
+            <columns>
+                <TableColumn text="Matricule" prefWidth="100" />
+                <TableColumn text="Modèle" prefWidth="150" />
+                <TableColumn text="Capacité" prefWidth="100" />
+                <TableColumn text="État" prefWidth="120" />
+                <TableColumn text="Prochaine maintenance" prefWidth="180" />
+                <TableColumn text="Actions" prefWidth="100" />
+            </columns>
+        </TableView>
+    </children>
+</VBox>

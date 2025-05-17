@@ -1,0 +1,249 @@
+/* Couleurs principales */
+* {
+    -fx-primary: #e74c3c;
+    -fx-primary-dark: #c0392b;
+    -fx-secondary: #f39c12;
+    -fx-secondary-dark: #d35400;
+    -fx-accent: #9b59b6;
+    -fx-light-grey: #f5f5f5;
+    -fx-medium-grey: #e0e0e0;
+    -fx-dark-grey: #757575;
+    -fx-focus-color: -fx-primary;
+    -fx-success: #2ecc71;
+    -fx-warning: #f1c40f;
+    -fx-danger: #e74c3c;
+}
+
+/* Fond principal avec dégradé */
+.background {
+    -fx-background-color: linear-gradient(to bottom right, #ffebee, #ffcdd2);
+}
+
+/* Cercles décoratifs */
+.decorative-circle {
+    -fx-fill: rgba(231, 76, 60, 0.3);
+    -fx-stroke: rgba(231, 76, 60, 0.5);
+    -fx-stroke-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+}
+
+.decorative-circle-secondary {
+    -fx-fill: rgba(243, 156, 18, 0.25);
+    -fx-stroke: rgba(243, 156, 18, 0.4);
+    -fx-stroke-width: 2;
+}
+
+.decorative-circle-accent {
+    -fx-fill: rgba(155, 89, 182, 0.2);
+    -fx-stroke: rgba(155, 89, 182, 0.3);
+    -fx-stroke-width: 2;
+}
+
+.decorative-circle-small {
+    -fx-fill: rgba(192, 57, 43, 0.15);
+    -fx-stroke: rgba(192, 57, 43, 0.3);
+    -fx-stroke-width: 2;
+}
+
+/* Formes géométriques supplémentaires */
+.decorative-square {
+    -fx-fill: rgba(231, 76, 60, 0.2);
+    -fx-stroke: rgba(231, 76, 60, 0.4);
+    -fx-stroke-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+}
+
+.decorative-square-secondary {
+    -fx-fill: rgba(243, 156, 18, 0.15);
+    -fx-stroke: rgba(243, 156, 18, 0.3);
+    -fx-stroke-width: 2;
+}
+
+.decorative-line {
+    -fx-stroke: rgba(231, 76, 60, 0.3);
+    -fx-stroke-width: 2;
+    -fx-stroke-dash-array: 10 5;
+}
+
+/* Carte du formulaire */
+.form-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-color: rgba(231, 76, 60, 0.3);
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.3), 15, 0, 0, 5);
+    -fx-padding: 30;
+}
+
+/* Conteneur du logo */
+.logo-container {
+    -fx-padding: 10;
+}
+
+.logo-background {
+    -fx-fill: #ffebee;
+    -fx-stroke: -fx-primary;
+    -fx-stroke-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.3), 5, 0, 0, 0);
+}
+
+/* Titre */
+.title-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-fill: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 1, 0, 0, 1);
+}
+
+/* Sous-titre */
+.subtitle-text {
+    -fx-font-size: 14px;
+    -fx-fill: -fx-dark-grey;
+    -fx-opacity: 0.8;
+}
+
+/* Conteneurs des champs de saisie */
+.input-container {
+    -fx-background-color: #ffebee;
+    -fx-background-radius: 5;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0;
+    -fx-pref-width: 300;
+}
+
+/* Champs de texte */
+.text-field,
+.password-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 12 15;
+    -fx-font-size: 14px;
+    -fx-pref-width: 300;
+    -fx-text-fill: #c0392b;
+}
+
+
+
+/* Indicateur de force du mot de passe */
+.password-strength-container {
+    -fx-padding: 5 0 0 0;
+}
+
+.password-strength-weak {
+    -fx-fill: -fx-danger;
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+}
+
+.password-strength-medium {
+    -fx-fill: -fx-warning;
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+}
+
+.password-strength-strong {
+    -fx-fill: -fx-success;
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+}
+
+.password-strength-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -fx-dark-grey;
+    -fx-padding: 0 0 0 5;
+}
+
+/* Checkbox des conditions */
+.terms-checkbox {
+    -fx-text-fill: -fx-dark-grey;
+}
+
+.terms-text {
+    -fx-font-size: 12px;
+    -fx-fill: -fx-dark-grey;
+}
+
+/* Boutons */
+.login-button,
+.register-button,
+.register-button-primary,
+.back-button {
+    -fx-padding: 10 25;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 30;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.login-button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+}
+
+.login-button:hover {
+    -fx-background-color: -fx-primary-dark;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 3);
+}
+
+.register-button {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-secondary;
+    -fx-border-color: -fx-secondary;
+    -fx-border-width: 1;
+    -fx-border-radius: 30;
+}
+
+.register-button:hover {
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 3);
+}
+
+.register-button-primary {
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: white;
+    -fx-background-radius: 30;
+}
+
+.register-button-primary:hover {
+    -fx-background-color: -fx-secondary-dark;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 3);
+}
+
+.back-button {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-dark-grey;
+    -fx-border-color: -fx-dark-grey;
+    -fx-border-width: 1;
+    -fx-border-radius: 30;
+}
+
+.back-button:hover {
+    -fx-background-color: -fx-dark-grey;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 3);
+}
+
+/* Message d'erreur ou de succès */
+.message-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -fx-primary;
+    -fx-font-weight: bold;
+}
+
+/* Barre de progression */
+.registration-progress {
+    -fx-pref-width: 300;
+}
+
+.registration-progress .bar {
+    -fx-background-color: -fx-secondary;
+}
+
+.registration-progress .track {
+    -fx-background-color: #ffebee;
+}

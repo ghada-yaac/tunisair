@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  stylesheets="@style.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+    <children>
+        <TabPane fx:id="flightsManagementTabPane">
+            <tabs>
+                <Tab text="Liste des vols">
+                    <content>
+                        <VBox spacing="10">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="Liste des vols" styleClass="section-title" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button fx:id="addFlightBtn" text="Ajouter un vol" styleClass="action-button"  />
+                            </HBox>
+                            <TableView fx:id="flightsTable">
+                                <columns>
+                                    <TableColumn text="Numéro" prefWidth="100" />
+                                    <TableColumn text="Départ" prefWidth="150" />
+                                    <TableColumn text="Destination" prefWidth="150" />
+                                    <TableColumn text="Date" prefWidth="120" />
+                                    <TableColumn text="Statut" prefWidth="100" />
+                                    <TableColumn text="Avion" prefWidth="120" />
+                                    <TableColumn text="Équipage" prefWidth="120" />
+                                    <TableColumn text="Actions" prefWidth="100" />
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Recherche de vols">
+                    <content>
+                        <VBox spacing="10">
+                            <Label text="Recherche des vols" styleClass="section-title" />
+                            <GridPane hgap="10" vgap="10" styleClass="search-form">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10" />
+                                </padding>
+                                <children>
+                                    <Label text="Numéro de vol" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                                    <TextField fx:id="flightNumberField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                                    <Label text="Ville de départ" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                                    <TextField fx:id="departureCityField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                                    <Label text="Ville d'arrivée" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                                    <TextField fx:id="arrivalCityField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                                    <Label text="Date" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                                    <DatePicker fx:id="datePicker" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                                    <Button fx:id="searchFlightsBtn" text="Rechercher" styleClass="action-button" GridPane.rowIndex="4" GridPane.columnIndex="1"  />
+                                </children>
+                            </GridPane>
+                            <TableView fx:id="searchResultsTable">
+                                <columns>
+                                    <TableColumn text="Numéro" prefWidth="100" />
+                                    <TableColumn text="Départ" prefWidth="150" />
+                                    <TableColumn text="Destination" prefWidth="150" />
+                                    <TableColumn text="Date" prefWidth="120" />
+                                    <TableColumn text="Statut" prefWidth="100" />
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</VBox>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController" styleClass="background" stylesheets="@login.css">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Circle fx:id="circle1" radius="100" styleClass="decorative-circle" translateX="-300" translateY="-200"/>
+    <Circle fx:id="circle2" radius="70" styleClass="decorative-circle-secondary" translateX="300" translateY="200"/>
+    <Circle fx:id="circle3" radius="40" styleClass="decorative-circle-accent" translateX="280" translateY="-150"/>
+    <Circle fx:id="circle4" radius="25" styleClass="decorative-circle-small" translateX="-250" translateY="150"/>
+
+    <VBox alignment="CENTER" spacing="20.0" styleClass="form-card" maxWidth="600">
+        <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
+        </padding>
+
+        <StackPane styleClass="logo-container">
+            <ImageView fx:id="imageView" fitHeight="200" fitWidth="300" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@/TUN.jpg"/>
+                </image>
+            </ImageView>
+        </StackPane>
+
+        <Text text="Connexion Agent" styleClass="title-text"/>
+
+        <HBox styleClass="input-container">
+            <TextField fx:id="emailField" promptText="Email" styleClass="text-field"/>
+        </HBox>
+
+        <HBox styleClass="input-container">
+            <PasswordField fx:id="passwordField" promptText="Mot de passe" styleClass="password-field"/>
+        </HBox>
+
+        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="loginButton" text="Se connecter" styleClass="login-button" onAction="#handleLogin"/>
+            <Button fx:id="registerButton" text="S'inscrire" styleClass="register-button" onAction="#handleRegister"/>
+        </HBox>
+
+        <Label fx:id="messageLabel" styleClass="message-label"/>
+    </VBox>
+</StackPane>
