@@ -38,7 +38,11 @@ public class MainController {
         loadView("/aircrafts-management.fxml");
         pageTitle.setText("Gestion des avions");
     }
-
+    @FXML
+    public void showPersonnel() {
+        loadView("/personnel-management.fxml");
+        pageTitle.setText("Gestion du personnel");
+    }
     @FXML
     public void showCrews() {
         loadView("/crews-management.fxml");

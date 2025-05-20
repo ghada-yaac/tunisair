@@ -52,6 +52,11 @@
                                 <Label text="🛩️" styleClass="icon" />
                             </graphic>
                         </Button>
+                        <Button fx:id="personnelBtn" text="Gestion du personnel" styleClass="nav-button" onAction="#showPersonnel">
+                            <graphic>
+                                <Label text="👤" styleClass="icon" />
+                            </graphic>
+                        </Button>
                         <Button fx:id="crewsBtn" text="Gestion des équipages" styleClass="nav-button" onAction="#showCrews">
                             <graphic>
                                 <Label text="👥" styleClass="icon" />

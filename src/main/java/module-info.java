@@ -9,4 +9,6 @@ module com.example.tunisair {
 
     exports app;
     opens app to javafx.fxml;
+    opens Entity to javafx.base, javafx.fxml;
+    exports Entity;
 }

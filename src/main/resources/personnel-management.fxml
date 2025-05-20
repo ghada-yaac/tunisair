@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PersonnelController" stylesheets="@style.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+    <children>
+        <!-- Header Section -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Gestion du personnel" styleClass="section-title" />
+            <Region HBox.hgrow="ALWAYS" />
+            <TextField fx:id="searchField" promptText="Rechercher..." styleClass="search-input" prefWidth="250" />
+            <Button fx:id="addPersonnelBtn" text="Ajouter un membre" styleClass="action-button"  />
+        </HBox>
+
+        <!-- Statistics Section -->
+        <HBox spacing="15" styleClass="stats-container">
+            <VBox styleClass="stat-card, hover-lift">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20" />
+                </padding>
+                <Label text="Total du personnel" styleClass="stat-title" />
+                <Label fx:id="totalPersonnelCount" text="0" styleClass="stat-value" />
+            </VBox>
+            <VBox styleClass="stat-card, hover-lift">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20" />
+                </padding>
+                <Label text="Pilotes" styleClass="stat-title" />
+                <Label fx:id="pilotesCount" text="0" styleClass="stat-value" />
+            </VBox>
+            <VBox styleClass="stat-card, hover-lift">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20" />
+                </padding>
+                <Label text="Hôtesses" styleClass="stat-title" />
+                <Label fx:id="hotessesCount" text="0" styleClass="stat-value" />
+            </VBox>
+        </HBox>
+
+        <!-- Form Section (Initially Hidden) -->
+        <VBox fx:id="formContainer" spacing="10" visible="false" managed="false" styleClass="form-container">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15" />
+            </padding>
+            <Label fx:id="formTitle" text="Ajouter un membre" styleClass="form-title" />
+            <GridPane hgap="10" vgap="10">
+                <Label text="Matricule:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="matriculeField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Rôle:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <ComboBox fx:id="roleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200" />
+            </GridPane>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="enregistrerBtn" text="Enregistrer" styleClass="action-button" onAction="#handleSave" />
+                <Button fx:id="annulerBtn" text="Annuler" styleClass="action-button" onAction="#hideForm" />
+            </HBox>
+        </VBox>
+
+        <!-- Table Section -->
+        <VBox spacing="10">
+            <TableView fx:id="personnelTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="matriculeColumn" text="Matricule" prefWidth="100" />
+                    <TableColumn fx:id="nomColumn" text="Nom" prefWidth="200" />
+                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="250" />
+                    <TableColumn fx:id="roleColumn" text="Rôle" prefWidth="150" />
+                    <TableColumn fx:id="actionColumn" text="Actions" prefWidth="120" />
+                </columns>
+                <placeholder>
+                    <Label text="Aucun membre du personnel trouvé" />
+                </placeholder>
+            </TableView>
+        </VBox>
+    </children>
+</VBox>
