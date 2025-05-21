@@ -1,57 +1,38 @@
 package DAO;
 
 import Entity.Equipage;
-
+import Entity.Vol;
+import DAO.DaoEquipage;
 import java.util.ArrayList;
 
 public class TestDaoEquipage {
     public static void main(String[] args) {
-        // 1. Insertion de deux équipages
-        Equipage e1 = new Equipage("E001", "P001", "P002", "P004", "P005", "P004");
-        Equipage e2 = new Equipage("E002", "P001", "P002", "P004", "P005", "P004");
+                // Créer un objet Equipage avec un code existant dans la base
+                Equipage e = new Equipage();
+                e.setCode("E001"); // ⚠️ Remplace par un code valide présent en BDD
 
-        System.out.println("Insertion des équipages...");
-        if (DaoEquipage.ajouter(e1)) {
-            System.out.println("Equipage E001 ajouté");
-        }
-        if (DaoEquipage.ajouter(e2)) {
-            System.out.println("Equipage E002 ajouté");
-        }
+        DaoEquipage volDAO = new DaoEquipage(); // Classe contenant ta méthode
+                ArrayList<Vol> vols = volDAO.getVolParEquipage(e);
 
-        // Affichage de la liste après insertion
-        System.out.println("\nListe après insertion :");
-        ArrayList<Equipage> listeEquipages = DaoEquipage.lister();
-        for (Equipage e : listeEquipages) {
-            System.out.println(e);
-        }
-
-        // 2. Modification de l'équipage e1 (changement du pilote et du copilote par exemple)
-        System.out.println("\nModification de l'équipage E001...");
-        e1.setPilote("Pilote1Modifie");
-        e1.setCopilote("Copilote1Modifie");
-
-        if (DaoEquipage.modifier(e1)) {
-            System.out.println("Equipage E001 modifié");
-        }
-
-        // Affichage de la liste après modification
-        System.out.println("\nListe après modification :");
-        listeEquipages = DaoEquipage.lister();
-        for (Equipage e : listeEquipages) {
-            System.out.println(e);
+                // Vérification et affichage des résultats
+                if (vols.isEmpty()) {
+                    System.out.println("Aucun vol trouvé pour l'équipage " + e.getCode());
+                } else {
+                    System.out.println("Vols trouvés pour l'équipage " + e.getCode() + " :");
+                    for (Vol v : vols) {
+                        System.out.println("Code Vol        : " + v.getCode());
+                        System.out.println("Lieu Départ     : " + v.getLieuDepart());
+                        System.out.println("Destination     : " + v.getDestination());
+                        System.out.println("Date Vol        : " + v.getDateVol());
+                        System.out.println("Date Arrivée    : " + v.getDateArrivee());
+                        System.out.println("Statut          : " + v.getStatut());
+                        System.out.println("Code Équipage   : " + v.getEquipage());
+                        System.out.println("Avion           : " + v.getAvion());
+                        System.out.println("Archivé         : " + v.isEtatArchivage());
+                        System.out.println("---------------------------");
+                    }
+                }
+            }
         }
 
-        // 3. Suppression de l'équipage e2
-        System.out.println("\nSuppression de l'équipage E002...");
-        if (DaoEquipage.supprimer(e2)) {
-            System.out.println("Equipage E002 supprimé");
-        }
 
-        // Affichage final de la liste après suppression
-        System.out.println("\nListe finale :");
-        listeEquipages = DaoEquipage.lister();
-        for (Equipage e : listeEquipages) {
-            System.out.println(e);
-        }
-    }
-}

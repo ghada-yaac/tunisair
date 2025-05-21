@@ -28,6 +28,15 @@ public class Equipage {
         this.hotesse3 = new SimpleStringProperty(hotesse3);
     }
 
+    public Equipage() {
+        this.code = new SimpleStringProperty();
+        this.pilote = new SimpleStringProperty();
+        this.copilote = new SimpleStringProperty();
+        this.hotesses1 = new SimpleStringProperty();
+        this.hotesse2 = new SimpleStringProperty();
+        this.hotesse3 = new SimpleStringProperty();
+    }
+
     // Getters
     public String getCode() {
         return code.get();

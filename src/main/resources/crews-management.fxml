@@ -4,26 +4,56 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  stylesheets="@style.css">
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CrewController" stylesheets="@style.css">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20" />
     </padding>
     <children>
+        <!-- Header Section -->
         <HBox alignment="CENTER_LEFT" spacing="10">
             <Label text="Gestion des équipages" styleClass="section-title" />
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="addCrewBtn" text="Ajouter un équipage" styleClass="action-button"  />
+            <Button fx:id="addCrewBtn" text="Ajouter un équipage" styleClass="action-button" />
         </HBox>
-        <TableView fx:id="crewsTable">
+
+        <!-- Form Section (Initially Hidden) -->
+        <VBox fx:id="formContainer" spacing="10" visible="false" managed="false" styleClass="form-container">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15" />
+            </padding>
+            <Label fx:id="formTitle" text="Ajouter un équipage" styleClass="form-title" />
+            <GridPane hgap="10" vgap="10">
+                <Label text="Code:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="codeField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Pilote:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <ComboBox fx:id="piloteComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200" />
+                <Label text="Copilote:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <ComboBox fx:id="copiloteComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200" />
+                <Label text="Hôtesse 1:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <ComboBox fx:id="hotesse1ComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200" />
+                <Label text="Hôtesse 2:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <ComboBox fx:id="hotesse2ComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4" prefWidth="200" />
+                <Label text="Hôtesse 3:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <ComboBox fx:id="hotesse3ComboBox" GridPane.columnIndex="1" GridPane.rowIndex="5" prefWidth="200" />
+            </GridPane>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="enregistrerBtn" text="Enregistrer" styleClass="action-button" onAction="#handleSave" />
+                <Button fx:id="annulerBtn" text="Annuler" styleClass="action-button" onAction="#hideForm" />
+            </HBox>
+        </VBox>
+
+        <!-- Table Section -->
+        <TableView fx:id="crewsTable" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn text="ID" prefWidth="100" />
-                <TableColumn text="Pilote" prefWidth="150" />
-                <TableColumn text="Copilote" prefWidth="150" />
-                <TableColumn text="Hôtesses/Stewards" prefWidth="150" />
-                <TableColumn text="Disponibilité" prefWidth="100" />
-                <TableColumn text="Qualifications" prefWidth="150" />
-                <TableColumn text="Actions" prefWidth="100" />
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+                <TableColumn fx:id="piloteColumn" text="Pilote" prefWidth="150" />
+                <TableColumn fx:id="copiloteColumn" text="Copilote" prefWidth="150" />
+                <TableColumn fx:id="hotessesColumn" text="Hôtesses/Stewards" prefWidth="200" />
+                <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="100" />
             </columns>
+            <placeholder>
+                <Label text="Aucun équipage trouvé" />
+            </placeholder>
         </TableView>
     </children>
 </VBox>

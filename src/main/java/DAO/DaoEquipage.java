@@ -1,6 +1,8 @@
 package DAO;
 
 import Entity.Equipage;
+import Entity.TStatut;
+import Entity.Vol;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -104,4 +106,37 @@ public class DaoEquipage {
 
         return false;
     }
+    public ArrayList<Vol> getVolParEquipage(Equipage e) {
+        ArrayList<Vol> vols = new ArrayList<>();
+        Connection cn = LaConnexion.seConnecter();
+        String requete = "SELECT * FROM vol WHERE equipage = ?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(requete);
+            pst.setString(1, e.getCode()); // supposons que Equipage a une méthode getId()
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String code = rs.getString("code");
+                String lieuDepart = rs.getString("lieuDepart");
+                String destination = rs.getString("destination");
+                Date dateVol = rs.getDate("dateVol");
+                TStatut statut = TStatut.valueOf(rs.getString("statut"));
+                String equipage = rs.getString("equipage");
+                Timestamp ts = rs.getTimestamp("dateArrivee");
+                Date dateArrivee = ts != null ? new Date(ts.getTime()) : null;
+                String avion = rs.getString("avion");
+                boolean etatArchivage = rs.getBoolean("etatArchivage");
+
+                Vol v = new Vol(code, lieuDepart, destination, dateVol, dateArrivee, statut, equipage, avion, etatArchivage);
+                vols.add(v);
+                System.out.println("un vol ajouté");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // ou un logger si tu préfères
+        }
+
+        return vols;
+    }
+
 }
