@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="15" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controller.FlightCalendarController" stylesheets="@style.css"
+      styleClass="calendar-container">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25" />
+    </padding>
+    <children>
+        <!-- Header with Title -->
+        <HBox alignment="CENTER" spacing="10">
+            <Label text="Calendrier des Vols" styleClass="section-title" />
+        </HBox>
+
+        <!-- Month Navigation -->
+        <HBox alignment="CENTER" spacing="20">
+            <Button fx:id="prevMonthBtn" text="◀ Précédent" onAction="#previousMonth" />
+            <Label fx:id="monthLabel" styleClass="month-label" />
+            <Button fx:id="nextMonthBtn" text="Suivant ▶" onAction="#nextMonth" />
+        </HBox>
+
+
+
+        <!-- Days of the Week -->
+        <GridPane fx:id="daysOfWeekGrid" hgap="5" vgap="5" alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Dim" GridPane.columnIndex="0" styleClass="day-label" />
+                <Label text="Lun" GridPane.columnIndex="1" styleClass="day-label" />
+                <Label text="Mar" GridPane.columnIndex="2" styleClass="day-label" />
+                <Label text="Mer" GridPane.columnIndex="3" styleClass="day-label" />
+                <Label text="Jeu" GridPane.columnIndex="4" styleClass="day-label" />
+                <Label text="Ven" GridPane.columnIndex="5" styleClass="day-label" />
+                <Label text="Sam" GridPane.columnIndex="6" styleClass="day-label" />
+            </children>
+        </GridPane>
+
+        <!-- Calendar Grid -->
+        <GridPane fx:id="calendarGrid" hgap="5" vgap="5" alignment="CENTER" styleClass="calendar-grid">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
+
+
+    </children>
+</VBox>

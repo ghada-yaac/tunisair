@@ -152,7 +152,6 @@ public class PersonnelController {
         matriculeField.setText("");
         nomField.setText("");
         emailField.setText("");
-        roleComboBox.getSelectionModel().clearSelection();
         formContainer.setVisible(true);
         formContainer.setManaged(true);
         selectedPersonnel = null;

@@ -8,11 +8,16 @@ import Entity.TRole;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -177,10 +182,11 @@ public class CrewController {
             }
         });
 
-        // Setup action column with edit and delete buttons
+        // Setup action column with edit, delete, and view flights buttons
         actionsColumn.setCellFactory(param -> new TableCell<>() {
             private final Button editButton = new Button("Modifier");
             private final Button deleteButton = new Button("Supprimer");
+            private final Button viewFlightsButton = new Button("Vols");
 
             {
                 editButton.setOnAction(event -> {
@@ -192,6 +198,11 @@ public class CrewController {
                     Equipage crew = getTableView().getItems().get(getIndex());
                     handleDelete(crew);
                 });
+
+                viewFlightsButton.setOnAction(event -> {
+                    Equipage crew = getTableView().getItems().get(getIndex());
+                    showFlightCalendar(crew);
+                });
             }
 
             @Override
@@ -200,7 +211,7 @@ public class CrewController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    HBox hbox = new HBox(5, editButton, deleteButton);
+                    HBox hbox = new HBox(5, editButton, deleteButton, viewFlightsButton);
                     setGraphic(hbox);
                 }
             }
@@ -212,6 +223,23 @@ public class CrewController {
         // Initialize form as hidden
         formContainer.setVisible(false);
         formContainer.setManaged(false);
+    }
+
+    private void showFlightCalendar(Equipage crew) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FlightCalendar.fxml"));
+            Parent root = loader.load();
+
+            FlightCalendarController controller = loader.getController();
+            controller.initData(crew);
+
+            Stage stage = new Stage();
+            stage.setTitle("Calendrier des vols - Équipage " + crew.getCode());
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erreur", "Impossible de charger le calendrier des vols : " + e.getMessage());
+        }
     }
 
     private void updateAvailablePersonnel(Equipage excludeCrew) {

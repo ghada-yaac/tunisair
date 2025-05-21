@@ -106,7 +106,7 @@ public class DaoEquipage {
 
         return false;
     }
-    public ArrayList<Vol> getVolParEquipage(Equipage e) {
+    public static ArrayList<Vol> getVolParEquipage(Equipage e) {
         ArrayList<Vol> vols = new ArrayList<>();
         Connection cn = LaConnexion.seConnecter();
         String requete = "SELECT * FROM vol WHERE equipage = ?";

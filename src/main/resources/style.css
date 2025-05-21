@@ -949,3 +949,278 @@
     -fx-border-width: 0 0 2 0;
     -fx-padding: 0 0 5 0;
 }
+/* ===== STYLES POUR LE CALENDRIER DE VOLS ===== */
+
+/* Variables spécifiques au calendrier */
+* {
+    /* Couleurs du calendrier */
+    -fx-calendar-header-bg: linear-gradient(to right, #C41E3A, #E63E58);
+    -fx-calendar-day-bg: #FFFFFF;
+    -fx-calendar-weekend-bg: #FFF5F5;
+    -fx-calendar-today-bg: #FFE6E8;
+    -fx-calendar-selected-bg: #C41E3A;
+    -fx-calendar-hover-bg: #FFD6DC;
+    -fx-calendar-flight-indicator: #D4AF37;
+
+    /* Tailles et espacements */
+    -fx-calendar-cell-size: 80px;
+    -fx-calendar-header-height: 50px;
+}
+
+/* ===== CONTENEUR PRINCIPAL DU CALENDRIER ===== */
+.calendar-container {
+    -fx-background-color: -fx-background-light;
+    -fx-background-radius: -fx-border-radius-lg;
+    -fx-effect: -fx-shadow-medium;
+    -fx-padding: 20px;
+    -fx-border-radius: -fx-border-radius-lg;
+    -fx-border-color: derive(-fx-primary-color, 80%);
+    -fx-border-width: 1px;
+}
+
+/* ===== EN-TÊTE DU CALENDRIER ===== */
+.month-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+    -fx-padding: 10px 20px;
+    -fx-background-color: -fx-calendar-header-bg;
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-min-width: 200px;
+    -fx-alignment: center;
+}
+
+/* Boutons de navigation */
+#prevMonthBtn, #nextMonthBtn {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 15px;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 1);
+    -fx-transition: -fx-background-color 0.2s, -fx-effect 0.2s, -fx-scale-x 0.1s, -fx-scale-y 0.1s;
+}
+
+#prevMonthBtn:hover, #nextMonthBtn:hover {
+    -fx-background-color: -fx-primary-light;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+#prevMonthBtn:pressed, #nextMonthBtn:pressed {
+    -fx-background-color: -fx-primary-dark;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* ===== JOURS DE LA SEMAINE ===== */
+#daysOfWeekGrid {
+    -fx-padding: 10px 0;
+}
+
+.day-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+    -fx-alignment: center;
+    -fx-min-width: -fx-calendar-cell-size;
+    -fx-max-width: -fx-calendar-cell-size;
+    -fx-min-height: 30px;
+    -fx-padding: 5px;
+    -fx-background-color: linear-gradient(to bottom, #F8F8F8, #EDEDED);
+    -fx-background-radius: 5px;
+    -fx-border-color: derive(-fx-primary-color, 80%);
+    -fx-border-width: 0 0 2 0;
+}
+
+/* Style spécial pour le weekend */
+.day-label {
+    -fx-text-fill: -fx-primary-color;
+    -fx-border-color: -fx-primary-color;
+}
+
+/* ===== GRILLE DU CALENDRIER ===== */
+.calendar-grid {
+    -fx-padding: 5px;
+    -fx-background-color: transparent;
+}
+
+/* Cellules du calendrier */
+.calendar-cell {
+    -fx-background-color: -fx-calendar-day-bg;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: derive(-fx-primary-color, 90%);
+    -fx-border-width: 1px;
+    -fx-min-width: -fx-calendar-cell-size;
+    -fx-max-width: -fx-calendar-cell-size;
+    -fx-min-height: -fx-calendar-cell-size;
+    -fx-max-height: -fx-calendar-cell-size;
+    -fx-padding: 5px;
+    -fx-cursor: hand;
+    -fx-transition: -fx-background-color 0.2s, -fx-effect 0.2s;
+}
+
+.calendar-cell:hover {
+    -fx-background-color: -fx-calendar-hover-bg;
+    -fx-effect: -fx-shadow-light;
+}
+
+/* Cellule pour les jours du mois précédent/suivant */
+.other-month-cell {
+    -fx-background-color: derive(-fx-light-grey, 30%);
+    -fx-opacity: 0.7;
+}
+
+.other-month-cell .date-label {
+    -fx-text-fill: -fx-text-secondary;
+}
+
+/* Cellule pour le jour actuel */
+.today-cell {
+    -fx-background-color: -fx-calendar-today-bg;
+    -fx-border-color: -fx-primary-color;
+    -fx-border-width: 2px;
+    -fx-effect: -fx-shadow-light;
+}
+
+/* Cellule pour les jours de weekend */
+.weekend-cell {
+    -fx-background-color: -fx-calendar-weekend-bg;
+}
+
+/* Cellule sélectionnée */
+.selected-cell {
+    -fx-background-color: derive(-fx-primary-color, 85%);
+    -fx-border-color: -fx-primary-color;
+    -fx-border-width: 2px;
+    -fx-effect: -fx-shadow-medium;
+}
+
+/* ===== CONTENU DES CELLULES ===== */
+/* Étiquette de date */
+.date-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-color;
+    -fx-padding: 2px 5px;
+    -fx-background-radius: 10px;
+}
+
+.today-cell .date-label {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 12px;
+    -fx-padding: 2px 6px;
+}
+
+/* Conteneur pour les vols */
+.flights-container {
+    -fx-spacing: 2px;
+    -fx-padding: 3px 0 0 0;
+}
+
+/* Indicateur de vol */
+.flight-indicator {
+    -fx-background-color: -fx-calendar-flight-indicator;
+    -fx-background-radius: 3px;
+    -fx-text-fill: black;
+    -fx-font-size: 10px;
+    -fx-padding: 1px 3px;
+    -fx-max-width: infinity;
+    -fx-alignment: center-left;
+    -fx-text-overflow: ellipsis;
+}
+
+/* Différents types de vols */
+.flight-departure {
+    -fx-background-color: -fx-primary-light;
+    -fx-text-fill: white;
+}
+
+.flight-arrival {
+    -fx-background-color: -fx-secondary-color;
+    -fx-text-fill: black;
+}
+
+.flight-delayed {
+    -fx-background-color: -fx-warning-color;
+    -fx-text-fill: black;
+}
+
+.flight-cancelled {
+    -fx-background-color: -fx-error-color;
+    -fx-text-fill: white;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes calendarFadeIn {
+    from { opacity: 0; translate: 0 -10px; }
+    to { opacity: 1; translate: 0 0; }
+}
+
+.calendar-grid {
+    -fx-animation: calendarFadeIn 0.5s ease-out;
+}
+
+/* Animation pour les cellules */
+@keyframes cellAppear {
+    from { opacity: 0; scale: 0.9; }
+    to { opacity: 1; scale: 1; }
+}
+
+.calendar-cell {
+    -fx-animation: cellAppear 0.3s ease-out;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media screen and (max-width: 800px) {
+    * {
+        -fx-calendar-cell-size: 60px;
+    }
+
+    .date-label {
+        -fx-font-size: 14px;
+    }
+
+    .flight-indicator {
+        -fx-font-size: 9px;
+    }
+}
+
+/* ===== AMÉLIORATIONS VISUELLES ===== */
+/* Badge pour indiquer le nombre de vols */
+.flight-count-badge {
+    -fx-background-color: -fx-primary-color;
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 2px 5px;
+    -fx-alignment: center;
+}
+
+/* Indicateur de jour férié */
+.holiday-indicator {
+    -fx-background-color: rgba(196, 30, 58, 0.2);
+    -fx-background-radius: 3px;
+    -fx-padding: 1px;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-color: -fx-primary-color;
+}
+
+/* Effet de survol amélioré */
+.calendar-cell:hover {
+    -fx-effect: dropshadow(gaussian, rgba(196, 30, 58, 0.3), 8, 0, 0, 0);
+    -fx-translate-y: -2px;
+}
+
+/* Effet de clic */
+.calendar-cell:pressed {
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+    -fx-translate-y: 1px;
+}
