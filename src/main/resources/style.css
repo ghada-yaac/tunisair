@@ -1224,3 +1224,24 @@
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
     -fx-translate-y: 1px;
 }
+
+/* Styles pour les états des avions */
+.aircraft-status-disponible {
+    -fx-text-fill: #388E3C; /* Vert */
+    -fx-font-weight: bold;
+}
+
+.aircraft-status-enMaintenance {
+    -fx-text-fill: #FFA000; /* Orange */
+    -fx-font-weight: bold;
+}
+
+.aircraft-status-volProgramme {
+    -fx-text-fill: #1976D2; /* Bleu */
+    -fx-font-weight: bold;
+}
+
+.aircraft-status-archive {
+    -fx-text-fill: #757575; /* Gris */
+    -fx-font-style: italic;
+}

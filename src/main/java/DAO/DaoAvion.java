@@ -11,7 +11,7 @@ public class DaoAvion {
     public static ArrayList<Avion> lister() {
         ArrayList<Avion> avions = new ArrayList<>();
         Connection cn = LaConnexion.seConnecter();
-        String requete = "SELECT * FROM avion";
+        String requete = "SELECT * FROM avion WHERE archive = false";
 
         try {
             Statement st = cn.createStatement();
@@ -24,7 +24,35 @@ public class DaoAvion {
                 TEtatAvion etat = TEtatAvion.valueOf(rs.getString(4));
                 Date date = rs.getDate(5);
 
-                Avion a = new Avion(matricule, modele, capacite, etat, date);
+                Avion a = new Avion(matricule, modele, capacite, etat, date, false);
+                avions.add(a);
+            }
+            System.out.println("Consultation réussie");
+        } catch (SQLException e) {
+            System.out.println("Problème de consultation : " + e.getMessage());
+        }
+
+        return avions;
+    }
+
+    public static ArrayList<Avion> listerTous() {
+        ArrayList<Avion> avions = new ArrayList<>();
+        Connection cn = LaConnexion.seConnecter();
+        String requete = "SELECT * FROM avion";
+
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(requete);
+
+            while (rs.next()) {
+                String matricule = rs.getString(1);
+                String modele = rs.getString(2);
+                int capacite = rs.getInt(3);
+                TEtatAvion etat = TEtatAvion.valueOf(rs.getString(4));
+                Date date = rs.getDate(5);
+                Boolean archive = rs.getBoolean(6);
+
+                Avion a = new Avion(matricule, modele, capacite, etat, date, archive);
                 avions.add(a);
             }
             System.out.println("Consultation réussie");
@@ -37,7 +65,7 @@ public class DaoAvion {
 
     public static boolean ajouter(Avion a) {
         Connection cn = LaConnexion.seConnecter();
-        String requete = "INSERT INTO avion VALUES (?, ?, ?, ?, ?)";
+        String requete = "INSERT INTO avion VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement pst = cn.prepareStatement(requete);
@@ -46,6 +74,7 @@ public class DaoAvion {
             pst.setInt(3, a.getCapacite());
             pst.setString(4, a.getEtat().name());
             pst.setDate(5, a.getDateProchaineMaintenance());
+            pst.setBoolean(6, a.isArchive());
 
             int n = pst.executeUpdate();
             if (n >= 1) {
@@ -59,9 +88,9 @@ public class DaoAvion {
         return false;
     }
 
-    public static boolean supprimer(Avion a) {
+    public static boolean archiver(Avion a) {
         Connection cn = LaConnexion.seConnecter();
-        String requete = "DELETE FROM avion WHERE matricule = ?";
+        String requete = "UPDATE avion SET archive = true WHERE matricule = ?";
 
         try {
             PreparedStatement pst = cn.prepareStatement(requete);
@@ -69,19 +98,18 @@ public class DaoAvion {
 
             int n = pst.executeUpdate();
             if (n >= 1) {
-                System.out.println("Suppression réussie");
+                System.out.println("Archivage réussi");
                 return true;
             }
         } catch (SQLException ex) {
-            System.out.println("Problème de requête de suppression : " + ex.getMessage());
+            System.out.println("Problème de requête d'archivage : " + ex.getMessage());
         }
-
         return false;
     }
 
     public static boolean modifier(Avion a) {
         Connection cn = LaConnexion.seConnecter();
-        String requete = "UPDATE avion SET modele=?, capacite=?, etat=?, dateProchaineMaintenance=? WHERE matricule=?";
+        String requete = "UPDATE avion SET modele=?, capacite=?, etat=?, dateProchaineMaintenance=?, archive=? WHERE matricule=?";
 
         try {
             PreparedStatement pst = cn.prepareStatement(requete);
@@ -89,7 +117,8 @@ public class DaoAvion {
             pst.setInt(2, a.getCapacite());
             pst.setString(3, a.getEtat().name());
             pst.setDate(4, a.getDateProchaineMaintenance());
-            pst.setString(5, a.getMatricule());
+            pst.setDate(5, a.getDateProchaineMaintenance());
+            pst.setString(6, a.getMatricule());
 
             int n = pst.executeUpdate();
             if (n >= 1) {

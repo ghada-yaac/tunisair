@@ -11,11 +11,12 @@ public class TestDaoAvion {
 
     public static void main(String[] args) {
          Avion avionTest = new Avion(
-            "ABC100",                  
+            "A",
             "Boeing 737",                
             100,                        
             TEtatAvion.disponible,            
-            Date.valueOf("2025-12-31")   
+            Date.valueOf("2025-12-31"),
+            false
         );
          DaoAvion.ajouter(avionTest);
       ArrayList <Avion>av=DaoAvion.lister();

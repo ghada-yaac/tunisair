@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css">
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controller.AircraftController" stylesheets="@style.css">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20" />
     </padding>
@@ -12,17 +13,49 @@
         <HBox alignment="CENTER_LEFT" spacing="10">
             <Label text="Gestion des avions" styleClass="section-title" />
             <Region HBox.hgrow="ALWAYS" />
+            <TextField fx:id="searchField" promptText="Rechercher..." styleClass="search-input" prefWidth="250" />
             <Button fx:id="addAircraftBtn" text="Ajouter un avion" styleClass="action-button" />
         </HBox>
-        <TableView fx:id="aircraftsTable">
-            <columns>
-                <TableColumn text="Matricule" prefWidth="100" />
-                <TableColumn text="Modèle" prefWidth="150" />
-                <TableColumn text="Capacité" prefWidth="100" />
-                <TableColumn text="État" prefWidth="120" />
-                <TableColumn text="Prochaine maintenance" prefWidth="180" />
-                <TableColumn text="Actions" prefWidth="100" />
-            </columns>
-        </TableView>
+
+        <!-- Form Section (Initially Hidden) -->
+        <VBox fx:id="formContainer" spacing="10" visible="false" managed="false" styleClass="form-container">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15" />
+            </padding>
+            <Label fx:id="formTitle" text="Ajouter un avion" styleClass="form-title" />
+            <GridPane hgap="10" vgap="10">
+                <Label text="Matricule:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="matriculeField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Modèle:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <ComboBox fx:id="modeleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200" />
+                <Label text="Capacité:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="capaciteField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="État:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <ComboBox fx:id="etatComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200" />
+                <Label text="Prochaine maintenance:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <DatePicker fx:id="dateMaintenancePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            </GridPane>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="enregistrerBtn" text="Enregistrer" styleClass="action-button" onAction="#handleSave" />
+                <Button fx:id="annulerBtn" text="Annuler" styleClass="action-button" onAction="#hideForm" />
+            </HBox>
+        </VBox>
+
+        <!-- Table Section -->
+        <VBox spacing="10">
+            <TableView fx:id="aircraftsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="matriculeColumn" text="Matricule" prefWidth="100" />
+                    <TableColumn fx:id="modeleColumn" text="Modèle" prefWidth="150" />
+                    <TableColumn fx:id="capaciteColumn" text="Capacité" prefWidth="100" />
+                    <TableColumn fx:id="etatColumn" text="État" prefWidth="120" />
+                    <TableColumn fx:id="maintenanceColumn" text="Prochaine maintenance" prefWidth="180" />
+                    <TableColumn fx:id="actionColumn" text="Actions" prefWidth="120" />
+                </columns>
+                <placeholder>
+                    <Label text="Aucun avion trouvé" />
+                </placeholder>
+            </TableView>
+        </VBox>
     </children>
 </VBox>

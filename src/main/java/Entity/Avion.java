@@ -23,16 +23,18 @@ public class Avion {
     private int capacite;
     private TEtatAvion etat;
     private Date dateProchaineMaintenance;
+    private boolean archive;
 
     public Avion() {
     }
 
-    public Avion(String matricule, String modele, int capacite, TEtatAvion etat, Date dateProchaineMaintenance) {
+    public Avion(String matricule, String modele, int capacite, TEtatAvion etat, Date dateProchaineMaintenance, boolean archive) {
         this.matricule = matricule;
         this.modele = modele;
         this.capacite = capacite;
         this.etat = etat;
         this.dateProchaineMaintenance = dateProchaineMaintenance;
+        this.archive = archive;
     }
 
     public static List<String> getModeles() {
@@ -87,5 +89,13 @@ public class Avion {
 
     public void setDateProchaineMaintenance(Date dateProchaineMaintenance) {
         this.dateProchaineMaintenance = dateProchaineMaintenance;
+    }
+
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public void setArchive(boolean archive) {
+        this.archive = archive;
     }
 }
