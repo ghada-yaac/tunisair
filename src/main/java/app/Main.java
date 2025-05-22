@@ -11,7 +11,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/main-layout.fxml"));  // note le slash au début
         Scene scene = new Scene(root);
-        stage.setTitle("Test JavaFX");
+        stage.setTitle("Tunisair");
         stage.setScene(scene);
         stage.show();
     }

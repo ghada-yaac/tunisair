@@ -1,6 +1,10 @@
 package Controller;
 
+import DAO.DaoAvion;
+import DAO.DaoEquipage;
 import DAO.DaoVol;
+import Entity.Avion;
+import Entity.Equipage;
 import Entity.TStatut;
 import Entity.Vol;
 import javafx.beans.property.SimpleStringProperty;
@@ -63,10 +67,14 @@ public class FlightController {
         departureCombo.getItems().addAll(Vol.getVilles());
         destinationCombo.getItems().addAll(Vol.getVilles());
         statusCombo.getItems().addAll(TStatut.values());
-
+        List<Avion> avions = DaoAvion.lister();
+        aircraftCombo.getItems().addAll(avions.stream().map(Avion::getMatricule).toList());
         // TODO: Remplir les combobox pour les avions et équipages
         // aircraftCombo.getItems().addAll(...);
         // crewCombo.getItems().addAll(...);
+        List<Equipage> equipages = DaoEquipage.lister();
+        crewCombo.getItems().addAll(equipages.stream().map(Equipage::getCode).toList());
+
 
         // Gestion des événements
         toggleFormBtn.setOnAction(e -> toggleForm(false));
