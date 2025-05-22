@@ -150,6 +150,8 @@ public class FlightController {
     }
 
     private void saveFlight() {
+        System.out.println("Tentative d'enregistrement...");
+        System.out.println("CurrentFlight: " + (currentFlight != null ? currentFlight.getCode() : "Nouveau vol"));
         // Validation des données
         if (codeField.getText().isEmpty() || departureCombo.getValue() == null ||
                 destinationCombo.getValue() == null || departureDate.getValue() == null ||
@@ -190,13 +192,17 @@ public class FlightController {
             success = DaoVol.modifier(vol);
         }
 
+
         if (success) {
             showAlert("Succès", currentFlight == null ? "Vol ajouté avec succès" : "Vol mis à jour avec succès",
                     Alert.AlertType.INFORMATION);
             loadFlights();
             toggleForm(false);
+            System.out.println("Opération réussie!");
+
         } else {
             showAlert("Erreur", "Une erreur est survenue lors de l'enregistrement", Alert.AlertType.ERROR);
+            System.out.println("Échec de l'opération!");
         }
     }
 

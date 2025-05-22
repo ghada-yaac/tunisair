@@ -94,7 +94,7 @@ public class DaoVol {
 
     public static boolean modifier(Vol v) {
         Connection cn = LaConnexion.seConnecter();
-        String requete = "UPDATE vol SET lieuDepart = ?, destination = ?, dateVol = ?, statut = ?, equipage = ?, dateArrivee = ?, avion = ?, etatArchivage = ? WHERE code = ?";
+        String requete = "UPDATE vol SET lieuDepart = ?, destination = ?, dateDepart = ?, statut = ?, equipage = ?, dateArrivee = ?, avion = ?, etatArchivage = ? WHERE code = ?";
 
         try {
             PreparedStatement pst = cn.prepareStatement(requete);
