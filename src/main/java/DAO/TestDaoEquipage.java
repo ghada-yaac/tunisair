@@ -9,7 +9,7 @@ public class TestDaoEquipage {
     public static void main(String[] args) {
                 // Créer un objet Equipage avec un code existant dans la base
                 Equipage e = new Equipage();
-                e.setCode("E001"); // ⚠️ Remplace par un code valide présent en BDD
+                e.setCode("2"); // ⚠️ Remplace par un code valide présent en BDD
 
         DaoEquipage volDAO = new DaoEquipage(); // Classe contenant ta méthode
                 ArrayList<Vol> vols = volDAO.getVolParEquipage(e);

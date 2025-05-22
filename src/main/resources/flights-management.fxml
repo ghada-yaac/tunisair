@@ -4,69 +4,80 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  stylesheets="@style.css">
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controller.FlightController" stylesheets="@style.css">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20" />
     </padding>
     <children>
-        <TabPane fx:id="flightsManagementTabPane">
-            <tabs>
-                <Tab text="Liste des vols">
-                    <content>
-                        <VBox spacing="10">
-                            <HBox alignment="CENTER_LEFT" spacing="10">
-                                <Label text="Liste des vols" styleClass="section-title" />
-                                <Region HBox.hgrow="ALWAYS" />
-                                <Button fx:id="addFlightBtn" text="Ajouter un vol" styleClass="action-button"  />
-                            </HBox>
-                            <TableView fx:id="flightsTable">
-                                <columns>
-                                    <TableColumn text="Numéro" prefWidth="100" />
-                                    <TableColumn text="Départ" prefWidth="150" />
-                                    <TableColumn text="Destination" prefWidth="150" />
-                                    <TableColumn text="Date" prefWidth="120" />
-                                    <TableColumn text="Statut" prefWidth="100" />
-                                    <TableColumn text="Avion" prefWidth="120" />
-                                    <TableColumn text="Équipage" prefWidth="120" />
-                                    <TableColumn text="Actions" prefWidth="100" />
-                                </columns>
-                            </TableView>
-                        </VBox>
-                    </content>
-                </Tab>
-                <Tab text="Recherche de vols">
-                    <content>
-                        <VBox spacing="10">
-                            <Label text="Recherche des vols" styleClass="section-title" />
-                            <GridPane hgap="10" vgap="10" styleClass="search-form">
-                                <padding>
-                                    <Insets top="10" right="10" bottom="10" left="10" />
-                                </padding>
-                                <children>
-                                    <Label text="Numéro de vol" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                                    <TextField fx:id="flightNumberField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-                                    <Label text="Ville de départ" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                                    <TextField fx:id="departureCityField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-                                    <Label text="Ville d'arrivée" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                                    <TextField fx:id="arrivalCityField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                                    <Label text="Date" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                                    <DatePicker fx:id="datePicker" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                                    <Button fx:id="searchFlightsBtn" text="Rechercher" styleClass="action-button" GridPane.rowIndex="4" GridPane.columnIndex="1"  />
-                                </children>
-                            </GridPane>
-                            <TableView fx:id="searchResultsTable">
-                                <columns>
-                                    <TableColumn text="Numéro" prefWidth="100" />
-                                    <TableColumn text="Départ" prefWidth="150" />
-                                    <TableColumn text="Destination" prefWidth="150" />
-                                    <TableColumn text="Date" prefWidth="120" />
-                                    <TableColumn text="Statut" prefWidth="100" />
-                                </columns>
-                            </TableView>
-                        </VBox>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Gestion des vols" styleClass="section-title" />
+            <Region HBox.hgrow="ALWAYS" />
+            <TextField fx:id="searchField" promptText="Rechercher..." styleClass="search-input" prefWidth="250" />
+            <Button fx:id="toggleFormBtn" text="Ajouter un vol" styleClass="action-button" />
+        </HBox>
+
+        <!-- Form Section (Initially Hidden) -->
+        <VBox fx:id="formContainer" spacing="10" visible="false" managed="false" styleClass="form-container">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15" />
+            </padding>
+            <Label fx:id="formTitle" text="Ajouter un vol" styleClass="form-title" />
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="30" />
+                    <ColumnConstraints percentWidth="70" />
+                </columnConstraints>
+
+                <children>
+                    <Label text="Code du vol:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                    <TextField fx:id="codeField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                    <Label text="Lieu de départ:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="departureCombo" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                    <Label text="Destination:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="destinationCombo" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                    <Label text="Date de départ:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                    <DatePicker fx:id="departureDate" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+                    <Label text="Date d'arrivée:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                    <DatePicker fx:id="arrivalDate" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+
+                    <Label text="Statut:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="statusCombo" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+
+                    <Label text="Avion:" GridPane.rowIndex="6" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="aircraftCombo" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+
+                    <Label text="Équipage:" GridPane.rowIndex="7" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="crewCombo" GridPane.rowIndex="7" GridPane.columnIndex="1" />
+                </children>
+            </GridPane>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="saveBtn" text="Enregistrer" styleClass="action-button" />
+                <Button fx:id="cancelBtn" text="Annuler" styleClass="outline-button" />
+            </HBox>
+        </VBox>
+
+        <!-- Table Section -->
+        <VBox spacing="10">
+            <TableView fx:id="flightsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="codeColumn" text="Code" prefWidth="80" />
+                    <TableColumn fx:id="departureColumn" text="Départ" prefWidth="120" />
+                    <TableColumn fx:id="destinationColumn" text="Destination" prefWidth="120" />
+                    <TableColumn fx:id="departureDateColumn" text="Date départ" prefWidth="100" />
+                    <TableColumn fx:id="statusColumn" text="Statut" prefWidth="80" />
+                    <TableColumn fx:id="aircraftColumn" text="Avion" prefWidth="100" />
+                    <TableColumn fx:id="crewColumn" text="Équipage" prefWidth="100" />
+                    <TableColumn fx:id="actionColumn" text="Actions" prefWidth="120" />
+                </columns>
+                <placeholder>
+                    <Label text="Aucun vol trouvé" />
+                </placeholder>
+            </TableView>
+        </VBox>
     </children>
 </VBox>

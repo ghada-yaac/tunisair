@@ -16,15 +16,17 @@ public class DaoVol {
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(requete);
+            int i = 0;
 
             while (rs.next()) {
+                i++;
                 String code = rs.getString("code");
                 String lieuDepart = rs.getString("lieuDepart");
                 String destination = rs.getString("destination");
-                Date dateVol = rs.getDate("dateVol");
+                Date dateVol = rs.getDate("dateDepart");
                 TStatut statut = TStatut.valueOf(rs.getString("statut"));
                 String equipage = rs.getString("equipage");
-                Timestamp ts = rs.getTimestamp("dateArrivee");
+                Date ts = rs.getDate("dateArrivee");
                 Date dateArrivee = ts != null ? new Date(ts.getTime()) : null;
                 String avion = rs.getString("avion");
                 boolean etatArchivage = rs.getBoolean("etatArchivage");
@@ -33,7 +35,8 @@ public class DaoVol {
                 vols.add(v);
             }
 
-            System.out.println("Consultation des vols réussie");
+
+            System.out.println("Consultation des vols réussie (" + i + " vols trouvés)");
         } catch (SQLException e) {
             System.out.println("Erreur lors de la consultation des vols : " + e.getMessage());
         }

@@ -112,13 +112,13 @@
 /* ===== SCROLL BAR STYLES ===== */
 .scroll-bar {
     -fx-background-color: transparent;
-    -fx-background-radius: 0;
+    -fx-background-radius: 0px;
     -fx-padding: 0 2 0 2;
 }
 
 .scroll-bar .thumb {
     -fx-background-color: derive(-fx-primary-color, 70%);
-    -fx-background-radius: 1000;
+    -fx-background-radius: 1000px;
 }
 
 .scroll-bar .thumb:hover {
@@ -128,14 +128,14 @@
 .scroll-bar .increment-button,
 .scroll-bar .decrement-button {
     -fx-background-color: transparent;
-    -fx-padding: 5;
+    -fx-padding: 5px;
 }
 
 .scroll-bar .increment-arrow,
 .scroll-bar .decrement-arrow {
     -fx-background-color: derive(-fx-primary-color, 50%);
     -fx-shape: " ";
-    -fx-padding: 0;
+    -fx-padding: 0px;
 }
 
 /* ===== SIDEBAR STYLES ===== */
@@ -1244,4 +1244,62 @@
 .aircraft-status-archive {
     -fx-text-fill: #757575; /* Gris */
     -fx-font-style: italic;
+}
+
+/* Styles pour les boutons d'action dans les tables */
+.table-action-button {
+    -fx-background-color: transparent;
+    -fx-padding: 6px;
+    -fx-min-width: 34px;
+    -fx-min-height: 34px;
+    -fx-background-radius: 17px;
+    -fx-transition: -fx-background-color 0.2s, -fx-effect 0.2s;
+}
+
+.table-action-button:hover {
+    -fx-background-color: derive(-fx-light-grey, -5%);
+    -fx-effect: -fx-shadow-light;
+}
+
+/* Style pour la barre de boutons */
+.button-bar {
+    -fx-padding: 15 0 0 0;
+}
+
+/* Style pour le formulaire */
+.form-container {
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+    -fx-background-color: -fx-background-white;
+    -fx-background-radius: 10px;
+    -fx-effect: -fx-shadow-medium;
+}
+
+/* Style pour les champs obligatoires */
+.required-field {
+    -fx-border-color: -fx-primary-light;
+    -fx-border-width: 0 0 0 3px;
+    -fx-padding: 0 0 0 5px;
+}
+
+.error-field {
+    -fx-border-color: #D32F2F;
+    -fx-border-width: 1px;
+}
+
+.form-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+    -fx-padding: 0 0 10 0;
+}
+
+.form-container {
+    -fx-background-color: -fx-background-white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: -fx-shadow-medium;
+    -fx-padding: 15px;
+    -fx-border-color: derive(-fx-primary-color, 80%);
+    -fx-border-width: 1px;
 }
