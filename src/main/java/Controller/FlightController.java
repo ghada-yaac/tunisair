@@ -262,6 +262,13 @@ public class FlightController {
             showAlert("Erreur", "Veuillez remplir tous les champs obligatoires", Alert.AlertType.ERROR);
             return;
         }
+        if(destinationCombo.getValue()==departureCombo.getValue()){
+
+            showAlert("Erreur", "MEME VILLE !!!", Alert.AlertType.ERROR);
+            return;
+        }
+
+
 
         LocalDate departure = departureDate.getValue();
         LocalDate arrival = arrivalDate.getValue();
