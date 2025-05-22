@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.stream.Collectors;
 import DAO.DaoAvion;
 import DAO.DaoEquipage;
 import DAO.DaoVol;
@@ -48,9 +49,24 @@ public class FlightController {
     private ObservableList<Vol> flights = FXCollections.observableArrayList();
     private Vol currentFlight = null;
 
+    @FXML private VBox searchContainer;
+    @FXML private TextField searchCodeField;
+    @FXML private ComboBox<String> searchDepartureCombo;
+    @FXML private ComboBox<String> searchDestinationCombo;
+    @FXML private DatePicker searchDepartureDate;
+    @FXML private ComboBox<TStatut> searchStatusCombo;
+    @FXML private ComboBox<String> searchAircraftCombo;
+    @FXML private Button toggleSearchBtn;
+    @FXML private Button searchBtn;
+    @FXML private Button resetSearchBtn;
+
+    private ObservableList<Vol> allFlights = FXCollections.observableArrayList();
+    private ObservableList<Vol> filteredFlights = FXCollections.observableArrayList();
+
     @FXML
     public void initialize() {
-        flightsTable.setItems(flights);  // Cette ligne est CRUCIALE
+        flightsTable.setItems(filteredFlights);
+        // flightsTable.setItems(flights);  // Cette ligne est CRUCIALE
         // Initialisation des colonnes
         codeColumn.setCellValueFactory(cellData -> cellData.getValue().codeProperty());
         departureColumn.setCellValueFactory(cellData -> cellData.getValue().lieuDepartProperty());
@@ -81,10 +97,94 @@ public class FlightController {
         cancelBtn.setOnAction(e -> toggleForm(false));
         saveBtn.setOnAction(e -> saveFlight());
 
+        searchDepartureCombo.getItems().addAll(Vol.getVilles());
+        searchDestinationCombo.getItems().addAll(Vol.getVilles());
+        searchStatusCombo.getItems().addAll(TStatut.values());
+
+        searchAircraftCombo.getItems().addAll(avions.stream().map(Avion::getMatricule).toList());
+        aircraftCombo.getItems().addAll(avions.stream().map(Avion::getMatricule).toList());
+
+        crewCombo.getItems().addAll(equipages.stream().map(Equipage::getCode).toList());
+
+        // Gestion des événements
+        toggleFormBtn.setOnAction(e -> toggleForm(false));
+        cancelBtn.setOnAction(e -> toggleForm(false));
+        saveBtn.setOnAction(e -> saveFlight());
+
+        // Nouveaux événements pour la recherche
+        toggleSearchBtn.setOnAction(e -> toggleSearch());
+        searchBtn.setOnAction(e -> searchFlights());
+        resetSearchBtn.setOnAction(e -> resetSearch());
+        searchCodeField.textProperty().addListener((obs, oldVal, newVal) -> quickSearch(newVal));
         // Chargement des données
         loadFlights();
+
     }
 
+    private void toggleSearch() {
+        boolean isVisible = searchContainer.isVisible();
+        searchContainer.setVisible(!isVisible);
+        searchContainer.setManaged(!isVisible);
+        toggleSearchBtn.setText(isVisible ? "Recherche avancée" : "Masquer recherche");
+    }
+
+    private void quickSearch(String keyword) {
+        if (keyword == null || keyword.isEmpty()) {
+            filteredFlights.setAll(allFlights);
+            return;
+        }
+
+        String lowerKeyword = keyword.toLowerCase();
+        List<Vol> filtered = allFlights.stream()
+                .filter(vol ->
+                        vol.getCode().toLowerCase().contains(lowerKeyword) ||
+                                vol.getLieuDepart().toLowerCase().contains(lowerKeyword) ||
+                                vol.getDestination().toLowerCase().contains(lowerKeyword) ||
+                                vol.getAvion().toLowerCase().contains(lowerKeyword) ||
+                                vol.getEquipage().toLowerCase().contains(lowerKeyword) ||
+                                vol.getStatut().toString().toLowerCase().contains(lowerKeyword))
+                .collect(Collectors.toList());
+
+        filteredFlights.setAll(filtered);
+    }
+
+    private void searchFlights() {
+        String code = searchCodeField.getText();
+        String departure = searchDepartureCombo.getValue();
+        String destination = searchDestinationCombo.getValue();
+        LocalDate departureDate = searchDepartureDate.getValue();
+        TStatut status = searchStatusCombo.getValue();
+        String aircraft = searchAircraftCombo.getValue();
+
+        List<Vol> filtered = allFlights.stream()
+                .filter(vol -> code == null || code.isEmpty() || vol.getCode().toLowerCase().contains(code.toLowerCase()))
+                .filter(vol -> departure == null || vol.getLieuDepart().equalsIgnoreCase(departure))
+                .filter(vol -> destination == null || vol.getDestination().equalsIgnoreCase(destination))
+                .filter(vol -> departureDate == null || vol.getDateVol().toLocalDate().equals(departureDate))
+                .filter(vol -> status == null || vol.getStatut() == status)
+                .filter(vol -> aircraft == null || vol.getAvion().equalsIgnoreCase(aircraft))
+                .collect(Collectors.toList());
+
+        filteredFlights.setAll(filtered);
+    }
+
+    private void resetSearch() {
+        searchCodeField.clear();
+        searchDepartureCombo.getSelectionModel().clearSelection();
+        searchDestinationCombo.getSelectionModel().clearSelection();
+        searchDepartureDate.setValue(null);
+        searchStatusCombo.getSelectionModel().clearSelection();
+        searchAircraftCombo.getSelectionModel().clearSelection();
+
+        filteredFlights.setAll(allFlights);
+    }
+
+    private void loadFlights() {
+        allFlights.clear();
+        List<Vol> vols = DaoVol.lister();
+        allFlights.addAll(vols);
+        filteredFlights.setAll(allFlights);
+    }
     private Callback<TableColumn<Vol, Void>, TableCell<Vol, Void>> createActionCellFactory() {
         return param -> new TableCell<>() {
             private final Button editBtn = new Button("✏️");
@@ -149,13 +249,6 @@ public class FlightController {
         crewCombo.getSelectionModel().clearSelection();
     }
 
-    private void loadFlights() {
-        flights.clear();
-        List<Vol> vols = DaoVol.lister();
-        System.out.println("Nombre de vols chargés : " + vols.size()); // Debug
-        flights.addAll(vols);
-        System.out.println("Nombre de vols dans ObservableList : " + flights.size()); // Debug
-    }
 
     private void saveFlight() {
         System.out.println("Tentative d'enregistrement...");

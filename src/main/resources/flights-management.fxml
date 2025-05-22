@@ -13,9 +13,48 @@
         <HBox alignment="CENTER_LEFT" spacing="10">
             <Label text="Gestion des vols" styleClass="section-title" />
             <Region HBox.hgrow="ALWAYS" />
-            <TextField fx:id="searchField" promptText="Rechercher..." styleClass="search-input" prefWidth="250" />
+            <Button fx:id="toggleSearchBtn" text="Recherche avancée" styleClass="action-button" />
+            <TextField fx:id="searchCodeField" promptText="Rechercher..." styleClass="search-input" prefWidth="250" />
             <Button fx:id="toggleFormBtn" text="Ajouter un vol" styleClass="action-button" />
         </HBox>
+
+        <!-- Advanced Search Section (Initially Hidden) -->
+        <VBox fx:id="searchContainer" spacing="10" visible="false" managed="false" styleClass="form-container">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15" />
+            </padding>
+            <Label text="Recherche avancée" styleClass="form-title" />
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="30" />
+                    <ColumnConstraints percentWidth="70" />
+                </columnConstraints>
+
+                <children>
+                    <Label text="Code du vol:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                    <TextField fx:id="searchCodeField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                    <Label text="Lieu de départ:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="searchDepartureCombo" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                    <Label text="Destination:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="searchDestinationCombo" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                    <Label text="Date de départ:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                    <DatePicker fx:id="searchDepartureDate" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+                    <Label text="Statut:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="searchStatusCombo" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+
+                    <Label text="Avion:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+                    <ComboBox fx:id="searchAircraftCombo" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+                </children>
+            </GridPane>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="searchBtn" text="Rechercher" styleClass="action-button" />
+                <Button fx:id="resetSearchBtn" text="Réinitialiser" styleClass="outline-button" />
+            </HBox>
+        </VBox>
 
         <!-- Form Section (Initially Hidden) -->
         <VBox fx:id="formContainer" spacing="10" visible="false" managed="false" styleClass="form-container">

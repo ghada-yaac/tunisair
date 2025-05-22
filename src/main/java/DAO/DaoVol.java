@@ -5,6 +5,7 @@ import Entity.Vol;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DaoVol {
 
@@ -118,5 +119,68 @@ public class DaoVol {
         }
 
         return false;
+    }
+    public static ArrayList<Vol> rechercher(String code, String lieuDepart, String destination,
+                                            Date dateDepart, TStatut statut, String avion) {
+        ArrayList<Vol> vols = new ArrayList<>();
+        Connection cn = LaConnexion.seConnecter();
+
+        StringBuilder requete = new StringBuilder("SELECT * FROM vol WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+
+        if (code != null && !code.isEmpty()) {
+            requete.append(" AND code LIKE ?");
+            params.add("%" + code + "%");
+        }
+        if (lieuDepart != null && !lieuDepart.isEmpty()) {
+            requete.append(" AND lieuDepart = ?");
+            params.add(lieuDepart);
+        }
+        if (destination != null && !destination.isEmpty()) {
+            requete.append(" AND destination = ?");
+            params.add(destination);
+        }
+        if (dateDepart != null) {
+            requete.append(" AND dateDepart = ?");
+            params.add(dateDepart);
+        }
+        if (statut != null) {
+            requete.append(" AND statut = ?");
+            params.add(statut.name());
+        }
+        if (avion != null && !avion.isEmpty()) {
+            requete.append(" AND avion = ?");
+            params.add(avion);
+        }
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(requete.toString());
+
+            for (int i = 0; i < params.size(); i++) {
+                pst.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String volCode = rs.getString("code");
+                String volLieuDepart = rs.getString("lieuDepart");
+                String volDestination = rs.getString("destination");
+                Date volDateVol = rs.getDate("dateDepart");
+                TStatut volStatut = TStatut.valueOf(rs.getString("statut"));
+                String volEquipage = rs.getString("equipage");
+                Date volDateArrivee = rs.getDate("dateArrivee");
+                String volAvion = rs.getString("avion");
+                boolean volEtatArchivage = rs.getBoolean("etatArchivage");
+
+                Vol v = new Vol(volCode, volLieuDepart, volDestination, volDateVol,
+                        volDateArrivee, volStatut, volEquipage, volAvion, volEtatArchivage);
+                vols.add(v);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la recherche des vols : " + e.getMessage());
+        }
+
+        return vols;
     }
 }
